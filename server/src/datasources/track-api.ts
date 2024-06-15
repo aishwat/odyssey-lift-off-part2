@@ -1,15 +1,14 @@
-const {RESTDataSource} = require('@apollo/datasource-rest');
+import {RESTDataSource} from "@apollo/datasource-rest";
+import {AuthorModel, TrackModel} from "../models";
 
-class TrackAPI extends RESTDataSource {
+export class TrackAPI extends RESTDataSource {
     baseURL = "https://odyssey-lift-off-rest-api.herokuapp.com/"
 
     getTracksForHome() {
-        return this.get("tracks")
+        return this.get<TrackModel[]>("tracks")
     }
 
     getAuthor(authorId: string) {
-        return this.get(`author/${authorId}`);
+        return this.get<AuthorModel>(`author/${authorId}`);
     }
 }
-
-module.exports = TrackAPI;
